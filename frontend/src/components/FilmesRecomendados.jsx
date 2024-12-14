@@ -1,28 +1,27 @@
-import { List, ListItem, ListItemText } from '@material-ui/core';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { FilmesGrid } from "./Filmes";
 
 function FilmesRecomendados() {
   const [filmes, setFilmes] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/filmes')
-      .then(response => {
+    axios
+      .get("http://127.0.0.1:8000/filmes/recomendados")
+      .then((response) => {
         setFilmes(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }, []);
 
   return (
-    <List>
-      {filmes.map(filme => (
-        <ListItem key={filme.id}>
-          <ListItemText primary={filme.titulo} />
-        </ListItem>
-      ))}
-    </List>
+    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+      <h1>Filmes recomendados</h1>
+
+      <FilmesGrid filmes={filmes} />
+    </div>
   );
 }
 

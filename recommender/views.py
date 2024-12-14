@@ -4,7 +4,8 @@ from owlready2 import get_ontology, onto_path
 from django.http import JsonResponse
 from rest_framework import generics
 from .models import Individuo
-from .serializers import IndividuoSerializer
+from .serializers import IndividuoSerializer,FilmeSerializer,GeneroSerializzer
+from .models import Filme,Genero
 
 def project_info(request):
     ontology_path = "recommender/movie_ontology.owl"
@@ -44,14 +45,19 @@ class IndividuoListView(generics.ListAPIView):
     queryset = Individuo.objects.all()
     serializer_class = IndividuoSerializer
 
-class IndividuoDetailView(generics.RetrieveAPIView):
-    queryset = Individuo.objects.all()
-    serializer_class = IndividuoSerializer
+class FilmeListView(generics.ListAPIView):
+    queryset = Filme.objects.all()
+    serializer_class = FilmeSerializer
 
-class IndividuoUpdateView(generics.UpdateAPIView):
-    queryset = Individuo.objects.all()
-    serializer_class = IndividuoSerializer
+class FilmeCreateView(generics.CreateAPIView):
+    queryset = Filme.objects.all()
+    serializer_class = FilmeSerializer
 
-class IndividuoDeleteView(generics.DestroyAPIView):
-    queryset = Individuo.objects.all()
-    serializer_class = IndividuoSerializer
+
+class GeneroListView(generics.ListAPIView):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializzer
+
+class GeneroCreateView(generics.CreateAPIView):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializzer
