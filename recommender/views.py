@@ -2,6 +2,9 @@ from django.shortcuts import render
 from rdflib import Graph, URIRef, Literal
 from owlready2 import get_ontology, onto_path
 from django.http import JsonResponse
+from rest_framework import generics
+from .models import Individuo
+from .serializers import IndividuoSerializer
 
 def project_info(request):
     ontology_path = "recommender/movie_ontology.owl"
@@ -31,3 +34,24 @@ def project_info(request):
             "edges": edges,
         }
     })
+
+
+class IndividuoCreateView(generics.CreateAPIView):
+    queryset = Individuo.objects.all()
+    serializer_class = IndividuoSerializer
+
+class IndividuoListView(generics.ListAPIView):
+    queryset = Individuo.objects.all()
+    serializer_class = IndividuoSerializer
+
+class IndividuoDetailView(generics.RetrieveAPIView):
+    queryset = Individuo.objects.all()
+    serializer_class = IndividuoSerializer
+
+class IndividuoUpdateView(generics.UpdateAPIView):
+    queryset = Individuo.objects.all()
+    serializer_class = IndividuoSerializer
+
+class IndividuoDeleteView(generics.DestroyAPIView):
+    queryset = Individuo.objects.all()
+    serializer_class = IndividuoSerializer
