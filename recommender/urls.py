@@ -5,4 +5,3 @@ urlpatterns = [
     path('recommendations/', recommend_movies, name='recommend_movies'),
     path('info/', info_movies, name='info_movies' )
 ]
-
