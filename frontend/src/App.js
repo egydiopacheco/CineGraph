@@ -6,7 +6,6 @@ import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Filmes from "./components/Filmes";
 import FilmesRecomendados from "./components/FilmesRecomendados";
-import Usuarios from "./components/Usuarios";
 
 function App() {
   return (
@@ -21,10 +20,7 @@ function App() {
               Início
             </Button>
             <Button color="inherit" component={Link} to="/filmes">
-              Filmes
-            </Button>
-            <Button color="inherit" component={Link} to="/usuarios">
-              Usuários
+              Cadastro
             </Button>
           </Toolbar>
         </AppBar>
@@ -32,7 +28,6 @@ function App() {
           <Routes>
             <Route path="/" element={<FilmesRecomendados />} />
             <Route path="/filmes" element={<Filmes />} />
-            <Route path="/usuarios" element={<Usuarios />} />
           </Routes>
         </div>
       </LocalizationProvider>
