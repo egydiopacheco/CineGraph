@@ -1,0 +1,354 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.org/movie_ontology#"
+     xml:base="http://example.org/movie_ontology"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://example.org/movie_ontology"/>
+
+    <!-- Enhanced Classes -->
+    <owl:Class rdf:about="http://example.org/movie_ontology#Movie"/>
+    <owl:Class rdf:about="http://example.org/movie_ontology#Genre"/>
+    <owl:Class rdf:about="http://example.org/movie_ontology#Person"/>
+    <owl:Class rdf:about="http://example.org/movie_ontology#Actor">
+        <rdfs:subClassOf rdf:resource="http://example.org/movie_ontology#Person"/>
+    </owl:Class>
+    <owl:Class rdf:about="http://example.org/movie_ontology#Director">
+        <rdfs:subClassOf rdf:resource="http://example.org/movie_ontology#Person"/>
+    </owl:Class>
+    <owl:Class rdf:about="http://example.org/movie_ontology#Studio"/>
+    <owl:Class rdf:about="http://example.org/movie_ontology#Award"/>
+
+    <!-- Enhanced Properties -->
+    <owl:ObjectProperty rdf:about="http://example.org/movie_ontology#hasGenre">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://example.org/movie_ontology#Genre"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/movie_ontology#hasActor">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://example.org/movie_ontology#Actor"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/movie_ontology#hasDirector">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://example.org/movie_ontology#Director"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/movie_ontology#producedBy">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://example.org/movie_ontology#Studio"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://example.org/movie_ontology#hasAward">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://example.org/movie_ontology#Award"/>
+    </owl:ObjectProperty>
+
+    <!-- Datatype Properties -->
+    <owl:DatatypeProperty rdf:about="http://example.org/movie_ontology#releaseDate">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/movie_ontology#name">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/movie_ontology#birthDate">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/movie_ontology#runtime">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/movie_ontology#rating">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+
+   <owl:DatatypeProperty rdf:about="http://example.org/movie_ontology#description">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://example.org/movie_ontology#titlePtBr">
+        <rdfs:domain rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <!-- Genres -->
+    <rdf:Description rdf:about="http://example.org/movie_ontology#ScienceFiction">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Science Fiction</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Drama">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Drama</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Action">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Action</rdfs:label>
+    </rdf:Description>
+
+    <!-- People -->
+    <rdf:Description rdf:about="http://example.org/movie_ontology#MatthewMcConaughey">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Matthew McConaughey</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1969-11-04</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#ChristopherNolan">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Director"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Christopher Nolan</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1970-07-30</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#HarrisonFord">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Harrison Ford</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1942-07-13</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#RidleyScott">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Director"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ridley Scott</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1937-11-30</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#MarkHamill">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mark Hamill</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1951-09-25</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#GeorgeLucas">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Director"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">George Lucas</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1944-05-14</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#SigourneyWeaver">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sigourney Weaver</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1949-10-08</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#SamNeil">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sam Neill</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1947-09-14</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#JeffGoldblum">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jeff Goldblum</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1952-10-22</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#StevenSpielberg">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Director"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Steven Spielberg</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1946-12-18</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#KeanuReeves">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Keanu Reeves</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1964-09-02</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#LaurenceFishburne">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Laurence Fishburne</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1961-07-30</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#WachowskiSisters">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Director"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Wachowski Sisters</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1967-06-21</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#MichaelJFox">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Michael J. Fox</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1961-06-09</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#ChristianBale">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Christian Bale</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1974-01-30</birthDate>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#HeathLedger">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Heath Ledger</name>
+        <birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1979-04-04</birthDate>
+        <deathDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2008-01-22</deathDate>
+    </rdf:Description>
+
+    <!-- Studios -->
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Paramount">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Studio"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Paramount Pictures</name>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#WarnerbBros">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Studio"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Warner Bros. Pictures</name>
+    </rdf:Description>
+
+    <!-- Awards -->
+    <rdf:Description rdf:about="http://example.org/movie_ontology#AcademyAward">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Award"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Academy Award</name>
+    </rdf:Description>
+
+    <!-- Enhanced Movie Instances -->
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Interstellar">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Interstellar</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Interestelar</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#ScienceFiction"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#MatthewMcConaughey"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#ChristopherNolan"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#Paramount"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2014-11-07</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">169</runtime>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#BladeRunner">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Blade Runner</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Blade Runner: O Caçador de Androides</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A blade runner must pursue and terminate four replicants who stole a ship in space and have returned to Earth to find their creator.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#ScienceFiction"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#HarrisonFord"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#RidleyScott"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#WarnerbBros"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1982-06-25</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">117</runtime>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Inception">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inception</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Origem</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A thief who steals corporate secrets through dream-sharing technology is tasked with planting an idea into the mind of a CEO.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#ScienceFiction"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#LeonardoDiCaprio"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#ChristopherNolan"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#WarnerbBros"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2010-07-16</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">148</runtime>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#TheDarkKnight">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Dark Knight</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Batman: O Cavaleiro das Trevas</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Batman faces the Joker, who plunges Gotham into anarchy and forces Batman closer to crossing the line between hero and vigilante.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#Action"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#ChristianBale"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#HeathLedger"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#ChristopherNolan"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#WarnerbBros"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2008-07-18</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">152</runtime>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#ForrestGump">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Forrest Gump</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Forrest Gump: O Contador de Histórias</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The presidencies of Kennedy and Johnson, the Vietnam War, and Watergate are all seen through the perspective of an Alabama man with an IQ of 75.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#Drama"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#TomHanks"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#RobertZemeckis"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#Paramount"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1994-07-06</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">142</runtime>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Gravity">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gravity</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gravidade</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Two astronauts work together to survive after an accident leaves them stranded in space.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#ScienceFiction"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#SandraBullock"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#AlfonsoCuaron"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#WarnerbBros"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2013-10-04</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">91</runtime>
+        <rating rdf:datatype="http://www.w3.org/2001/XMLSchema#float">7.7</rating>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#TheMartian">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Martian</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Perdido em Marte</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An astronaut becomes stranded on Mars and must rely on ingenuity to survive.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#ScienceFiction"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#MattDamon"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#RidleyScott"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#Paramount"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2015-10-02</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">144</runtime>
+        <rating rdf:datatype="http://www.w3.org/2001/XMLSchema#float">8.0</rating>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#StarWars">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Star Wars: A New Hope</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Star Wars: Uma Nova Esperança</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Luke Skywalker joins forces to save the galaxy from the evil Empire.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#ScienceFiction"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#HarrisonFord"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#MarkHamill"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#GeorgeLucas"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#Paramount"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1977-05-25</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">121</runtime>
+        <rating rdf:datatype="http://www.w3.org/2001/XMLSchema#float">8.6</rating>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Alien">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alien</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alien: O Oitavo Passageiro</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A deadly alien stalks the crew of a spaceship.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#ScienceFiction"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#SigourneyWeaver"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#RidleyScott"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#WarnerbBros"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1979-05-25</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">117</runtime>
+        <rating rdf:datatype="http://www.w3.org/2001/XMLSchema#float">8.5</rating>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#JurassicPark">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Movie"/>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jurassic Park</name>
+        <titlePtBr rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jurassic Park: O Parque dos Dinossauros</titlePtBr>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dinosaurs run amok in a theme park.</description>
+        <hasGenre rdf:resource="http://example.org/movie_ontology#ScienceFiction"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#SamNeil"/>
+        <hasActor rdf:resource="http://example.org/movie_ontology#JeffGoldblum"/>
+        <hasDirector rdf:resource="http://example.org/movie_ontology#StevenSpielberg"/>
+        <producedBy rdf:resource="http://example.org/movie_ontology#Paramount"/>
+        <releaseDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1993-06-11</releaseDate>
+        <runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">127</runtime>
+        <rating rdf:datatype="http://www.w3.org/2001/XMLSchema#float">8.2</rating>
+    </rdf:Description>
+</rdf:RDF>
