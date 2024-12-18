@@ -98,6 +98,96 @@
         <rdfs:label>Action</rdfs:label>
     </rdf:Description>
 
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Adventure">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Adventure</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Comedy">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Comedy</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Thriller">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Thriller</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Horror">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Horror</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Fantasy">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Fantasy</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Mystery">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Mystery</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Romance">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Romance</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Crime">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Crime</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Animation">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Animation</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Documentary">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Documentary</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Biography">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Biography</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#History">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>History</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Musical">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Musical</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Western">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Western</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#War">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>War</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Family">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Family</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#Sport">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Sport</rdfs:label>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/movie_ontology#SciFi">
+        <rdf:type rdf:resource="http://example.org/movie_ontology#Genre"/>
+        <rdfs:label>Sci-Fi</rdfs:label>
+    </rdf:Description>
+
     <!-- People -->
     <rdf:Description rdf:about="http://example.org/movie_ontology#MatthewMcConaughey">
         <rdf:type rdf:resource="http://example.org/movie_ontology#Actor"/>
