@@ -7,30 +7,14 @@ logger = logging.getLogger(__name__)
 ontology_path = "recommender/movie_ontology.rdf"
 movie_onto = get_ontology(f"file://{ontology_path}").load()
 
-def recommend_movies(request):
+def __build_base_sparql_query():
     """
-    Given a request with some movie parameters, recommend top 3 movies to the user
+    Build the base SPARQL query with common SELECT and WHERE clauses.
+
+    Returns:
+        str: Base SPARQL query template
     """
-    search_query = request.GET.get('search_query', '').lower()
-    genre_filter = request.GET.get('genre', '')
-    director_filter = request.GET.get('director', '')
-    runtime_filter = request.GET.get('runtime', '')
-    release_date_filter = request.GET.get('release_date', '')
-
-    filters = {}
-    if genre_filter:
-        filters['genre'] = genre_filter
-    if director_filter:
-        filters['director'] = director_filter
-    if runtime_filter:
-        filters['runtime'] = runtime_filter
-    if release_date_filter:
-        filters['release_date'] = release_date_filter
-
-    print(filters)
-    print(__calculate_weight_map(filters))
-
-    sparql_query = """
+    return """
     PREFIX : <http://example.org/movie_ontology#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -39,9 +23,9 @@ def recommend_movies(request):
     WHERE {
         ?movie a :Movie .
         ?movie :name ?name .
-        ?movie :titlePtBr ?titlePtBr .
-        ?movie :description ?description .
-        ?movie :runtime ?runtime .
+        OPTIONAL { ?movie :titlePtBr ?titlePtBr . }
+        OPTIONAL { ?movie :description ?description . }
+        OPTIONAL { ?movie :runtime ?runtime . }
 
         ?movie :hasGenre ?genreObj .
         ?genreObj rdfs:label ?genreLabel .
@@ -57,52 +41,124 @@ def recommend_movies(request):
             ?movie :hasActor ?actor .
             ?actor :name ?actorName .
         }
-
     """
 
-    if search_query:
-        sparql_query += f' FILTER(CONTAINS(LCASE(?name), "{search_query.lower()}")) .'
+def __apply_filters(sparql_query, filters):
+    """
+    Apply filters to the SPARQL query.
 
-    if genre_filter:
-        sparql_query += f' FILTER(LCASE(?genreLabel) = "{genre_filter.lower()}") .'
+    Args:
+        sparql_query (str): Base SPARQL query
+        filters (dict): Filters to apply
 
-    if director_filter:
-        sparql_query += f' FILTER(LCASE(?directorName) = "{director_filter.lower()}") .'
+    Returns:
+        str: SPARQL query with applied filters
+    """
+    filter_mappings = {
+        'genre': lambda value: f' FILTER(LCASE(?genreLabel) = "{value.lower()}") .',
+        'director': lambda value: f' FILTER(LCASE(?directorName) = "{value.lower()}") .',
+        'runtime': lambda value: f' FILTER(LCASE(?runtime) = "{value.lower()}") .',
+        'search_query': lambda value: f' FILTER(CONTAINS(LCASE(?name), "{value.lower()}")) .',
+        'release_date': lambda value: (
+            ' FILTER(?releaseDate < "2000-01-01"^^xsd:date) .'
+            if value == "before 2000" else ''
+        )
+    }
 
-    if runtime_filter:
-        sparql_query += f' FILTER(LCASE(?runtime) = "{runtime_filter.lower()}") .'
-
-    if release_date_filter == "before 2000":
-        sparql_query += ' FILTER(?releaseDate < "2000-01-01"^^xsd:date) .'
+    for key, value in filters.items():
+        if value and key in filter_mappings:
+            sparql_query += filter_mappings[key](value)
 
     sparql_query += " }"
+    return sparql_query
+
+def __extract_movie_data(row):
+    """
+    Extract movie data from a SPARQL result row.
+
+    Args:
+        row (tuple): SPARQL query result row
+
+    Returns:
+        dict: Extracted movie data
+    """
+    return {
+        "title": row[1],
+        "titlePtBr": row[2],
+        "director": row[7],
+        "genre": row[3],
+        "release_date": str(row[4]) if row[4] else None,
+        "description": row[5],
+        "runtime": row[6]
+    }
+
+def __get_initial_results(filters):
+    """
+    Get initial movie results based on filters.
+
+    Args:
+        filters (dict): Filters to apply
+
+    Returns:
+        list: List of movie results
+    """
+    sparql_query = __build_base_sparql_query()
+
+    sparql_query = __apply_filters(sparql_query, filters)
 
     results = list(default_world.sparql(sparql_query))
 
-    scores = {}
+    if not results:
+        if filters.get('genre'):
+            sparql_query_broad = __build_base_sparql_query()
+            sparql_query_broad += f' FILTER(LCASE(?genreLabel) = "{filters["genre"].lower()}") .'
+            sparql_query_broad += " }"
+            results = list(default_world.sparql(sparql_query_broad))
 
-    for row in results:
-        movie_data = {
-            "title": row[1],
-            "titlePtBr": row[2],
-            "director": row[7],
-            "genre": row[3],
-            "release_date": str(row[4]) if row[4] else None,
-            "description": row[5],
-            "runtime": row[6]
+    return results
+
+def recommend_movies(request):
+    """
+    Recommend top 3 movies based on user request parameters.
+
+    Args:
+        request: Django request object
+
+    Returns:
+        JsonResponse: Top recommended movies
+    """
+    try:
+        filters = {
+            'search_query': request.GET.get('search_query', '').lower(),
+            'genre': request.GET.get('genre', ''),
+            'director': request.GET.get('director', ''),
+            'runtime': request.GET.get('runtime', ''),
+            'release_date': request.GET.get('release_date', '')
         }
-        score = __calculate_score(movie_data, filters)
-        print(score)
-        scores[movie_data["title"]] = score
 
-    print(scores)
-    noisy_scores = __add_noise_to_scores(scores)
-    print(noisy_scores)
+        filters = {k: v for k, v in filters.items() if v}
 
-    top_movies = __get_top_movies(noisy_scores)
-    top_movies_response = [{"title": movie[0], "score": movie[1]} for movie in top_movies]
-    print(top_movies_response)
-    return JsonResponse({"top_movies": top_movies_response})
+        results = __get_initial_results(filters)
+
+        scores = {}
+        for row in results:
+            movie_data = __extract_movie_data(row)
+            score = __calculate_score(movie_data, filters)
+            scores[movie_data["title"]] = score
+
+        noisy_scores = __add_noise_to_scores(scores)
+        top_movies = __get_top_movies(noisy_scores)
+
+        top_movies_response = [
+            {"title": movie[0], "score": movie[1]}
+            for movie in top_movies
+        ]
+
+        return JsonResponse({"top_movies": top_movies_response})
+
+    except Exception as e:
+        logger.error(f"Error occurred while recommending a movie: {e}")
+        return JsonResponse({"error": "Internal Server Error"}, status=500)
 
     """
     merged_results = {}

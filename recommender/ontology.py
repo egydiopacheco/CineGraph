@@ -38,12 +38,10 @@ def detailed_ontology_analysis(ontology_path):
     Person = onto.search_one(iri="*Person")
 
     movies = list(Movie.instances())
+    movies = [m for m in movies if Movie in m.is_a and not any(cls in m.is_a for cls in [onto.Actor, onto.Director, onto.Studio, onto.Award])]
+
     genres = list(Genre.instances())
     persons = list(Person.instances())
-
-    for person in persons:
-        print(person.name)
-
 
     print("Ontology Analysis:")
     print("------------------")
@@ -60,9 +58,29 @@ def detailed_ontology_analysis(ontology_path):
     for prop in onto.data_properties():
         print(f"- {prop.name}")
 
-    print("\nIndividuals:")
-    for ind in onto.individuals():
-        print(f"- {ind.name}")
+    print("Ontology Content:")
+    print("------------------")
+
+    print("\nPersons:")
+    for person in persons:
+        print(person.name)
+
+    print("\nMovies:")
+    for movie in movies:
+        print(movie.name)
+
+    print("\nGenres:")
+    for genre in genres:
+        print(genre.name)
+
+    #print("\nMovies (with types):")
+    #for movie in movies:
+    #    print(f"{movie.name}: {movie.is_a}")
+
+
+    for person in persons:
+        print(f"{person.name}: {person.is_a}")
+
 
 check_ontology_consistency(ontology_path)
 detailed_ontology_analysis(ontology_path)
