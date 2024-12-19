@@ -23,16 +23,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2hvq**$upuz)y%kf4d@j%k5yxc8g7146+)gxgie5z0l!5t8qs@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-CORS_ALLOWED_ORIGINS  = [
-        'http://localhost:3000',
-    ]
+CORS_ALLOW_ALL_ORIGINS = True
 
-
-# Application definition
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS"
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',

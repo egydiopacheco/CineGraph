@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import project_info
+from .views import recommend_movies, info_movies
 
 urlpatterns = [
-    path('api/project-info/', project_info, name='project_info'),
+    path('recommendations/', recommend_movies, name='recommend_movies'),
+    path('info/', info_movies, name='info_movies' )
 ]
